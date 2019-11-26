@@ -1,20 +1,18 @@
 import React, {Component} from 'react';
-import {View} from 'react-native';
+
 import {
   Container,
-  Header,
   Content,
   Button,
   Text,
   Left,
-  Icon,
-  Body,
-  Title,
   Right,
-  Footer,
   List,
   ListItem,
+  Badge,
 } from 'native-base';
+
+import {Header, Footer} from '../../components';
 
 import styles from './Ranking.styles';
 
@@ -36,16 +34,16 @@ const mockJogadores = [
   {name: 'jogador 15', score: '7'},
 ];
 
-export default class Ranking extends Component {
+class Ranking extends Component {
   getListItem = item => (
-    <ListItem>
+    <ListItem key={`${item.name}${item.score}`}>
       <Left>
-        <Text>
-          {item.name} ------- {item.score}
-        </Text>
+        <Text>{item.name}</Text>
       </Left>
       <Right>
-        <Icon name="arrow-forward" />
+        <Badge primary>
+          <Text>{item.score}</Text>
+        </Badge>
       </Right>
     </ListItem>
   );
@@ -53,35 +51,16 @@ export default class Ranking extends Component {
   render() {
     return (
       <Container>
-        <Header>
-          <Left>
-            <Button transparent>
-              <Icon name="menu" />
-            </Button>
-          </Left>
-          <Body>
-            <Title>Ranking</Title>
-          </Body>
-          <Right />
-        </Header>
+        <Header title={'Ranking'} />
+
         <Content>
           <List>{mockJogadores.map(item => this.getListItem(item))}</List>
         </Content>
 
-        <Footer style={{backgroundColor: 'white'}}>
-          <Button
-            style={{marginBottom: 10, marginRight: 10}}
-            iconLeft
-            onPress={() => this._deckSwiper._root.swipeLeft()}>
-            {/* <Icon name="arrow-back" /> */}
-            <Text>Nova Rodada</Text>
-          </Button>
-          <Button iconRight onPress={() => this._deckSwiper._root.swipeRight()}>
-            {/* <Icon name="arrow-forward" /> */}
-            <Text>Fim</Text>
-          </Button>
-        </Footer>
+        <Footer />
       </Container>
     );
   }
 }
+
+export default Ranking;
