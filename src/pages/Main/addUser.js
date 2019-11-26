@@ -11,6 +11,7 @@ import {
   Input,
   Form,
   Icon,
+  Submit,
 } from 'native-base';
 
 import styles from './addUser.style';
