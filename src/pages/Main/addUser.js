@@ -7,10 +7,13 @@ import {
   List,
   ListItem,
   Text,
-  Title,
   Input,
-  Form,
+  Right,
   Icon,
+  Left,
+  Item,
+  Button,
+  Title,
 } from 'native-base';
 
 import styles from './addUser.style';
@@ -22,36 +25,40 @@ let list = [
 
 export default class AddUser extends Component {
 
-  addUser = user => {
-    this.list.push(user);
-  };
+  state = { nomeJogador: ''}
+
 
   render() {
     return (
       <Container>
-        <Title>Novo Jogo - Adicione os jogadores</Title>
+      <Header />
+      <Item>
+      <Input placeholder='Nome do jogador' onChangeText={(text) => this.setState({nomeJogador: text})}/>
+      <Icon active name='person' />
+    </Item>
 
-        <Form>
-          <Input
-            autoCaptalize="none"
-            autoCorrect={false}
-            placeHolder="Nome do jogador"
-          />
-          <Submit onPress={(e) => {}}>
+          <Button iconLeft
+            onPress={ (e) => {
+              alert(JSON.stringify(this.state.nomeJogador));
+          } }>
             <Icon
               ios="ios-add"
               android="md-add"
               style={{fontSize: 20, color: 'blue'}}
-            />
-          </Submit>
-        </Form>
-
-        <Header />
+              />
+          </Button>
         <Content>
           <List>
             {list.map(user => (
                 <ListItem>
-                    <Text>{user.name}</Text>
+                    <Left>
+                    <Text>
+                      {user.name} ------- {user.score}
+                    </Text>
+                  </Left>
+                  <Right>
+                    <Icon name="minus" />
+                  </Right>
                 </ListItem>
             ))}
           </List>
