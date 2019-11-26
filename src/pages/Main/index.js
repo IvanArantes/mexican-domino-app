@@ -1,6 +1,6 @@
 import React from 'react';
-import Ranking from '../Ranking/Ranking';
+import AddUser from './addUser';
 
-const Main = () => <Ranking />;
+const Main = () => <AddUser />;
 
 export default Main;
