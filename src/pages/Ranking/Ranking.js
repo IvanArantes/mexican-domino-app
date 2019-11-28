@@ -35,6 +35,7 @@ const mockJogadores = [
 ];
 
 class Ranking extends Component {
+
   getListItem = item => (
     <ListItem key={`${item.name}${item.score}`}>
       <Left>
@@ -51,7 +52,7 @@ class Ranking extends Component {
   render() {
     return (
       <Container>
-        <Header title={'Ranking'} />
+        {/*<Header title={'Ranking'} />*/}
 
         <Content>
           <List>{mockJogadores.map(item => this.getListItem(item))}</List>

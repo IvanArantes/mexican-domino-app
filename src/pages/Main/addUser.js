@@ -1,8 +1,7 @@
 /* eslint-disable prettier/prettier */
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   Container,
-  Header,
   Content,
   List,
   ListItem,
@@ -13,57 +12,87 @@ import {
   Left,
   Item,
   Button,
-  Title,
+  Toast,
+  Root,
 } from 'native-base';
 
 import styles from './addUser.style';
 
-let list = [
-    {name: 'Jogador 1', score: 10},
-    {name: 'Jogador 12', score: 12},
-];
-
 export default class AddUser extends Component {
 
-  state = { nomeJogador: ''}
+  state = {
+    nomeJogador: '',
+    jogadores: [],
+  }
 
+  addJogador() {
+    if (this.state.nomeJogador) {
+      this.setState((prevState) => ({
+        jogadores: prevState.jogadores.concat({ name: this.state.nomeJogador.trim(), score: 0 }),
+      }));
+
+      Toast.show({
+        text: 'Jogador adicionado!',
+        buttonText: 'Okay',
+        position: 'bottom',
+        type: 'success',
+        duration: 3000,
+      });
+    }
+  }
 
   render() {
     return (
-      <Container>
-      <Header />
-      <Item>
-      <Input placeholder='Nome do jogador' onChangeText={(text) => this.setState({nomeJogador: text})}/>
-      <Icon active name='person' />
-    </Item>
+      <Root>
+        <Container>
+          <Content>
 
-          <Button iconLeft
-            onPress={ (e) => {
-              alert(JSON.stringify(this.state.nomeJogador));
-          } }>
-            <Icon
-              ios="ios-add"
-              android="md-add"
-              style={{fontSize: 20, color: 'blue'}}
-              />
-          </Button>
-        <Content>
-          <List>
-            {list.map(user => (
-                <ListItem>
-                    <Left>
+            <Item>
+              <Left>
+                <Input placeholder="Nome do jogador" onChangeText={(text) => this.setState({ nomeJogador: text })} />
+              </Left>
+              <Right>
+                <Button iconRight
+                  onPress={() => this.addJogador()}>
+                  <Text>Adicionar</Text>
+                  <Icon
+                    name="add"
+                    style={{ fontSize: 20, color: 'white' }}
+                  />
+                </Button>
+              </Right>
+            </Item>
+
+            <List>
+              {this.state.jogadores.map(user => (
+                <ListItem key={user.name}>
+                  <Left>
                     <Text>
-                      {user.name} ------- {user.score}
+                      {user.name}
                     </Text>
                   </Left>
                   <Right>
-                    <Icon name="minus" />
+                    <Button
+                      onPress={() => alert('removido')}
+                    >
+                      <Icon
+                        ios="ios-remove"
+                        android="md-remove"
+                        style={{ fontSize: 20, color: 'white' }}
+                      />
+                    </Button>
                   </Right>
                 </ListItem>
-            ))}
-          </List>
-        </Content>
-      </Container>
+              ))}
+            </List>
+
+            <Button
+            onPress={() => this.props.navigation.navigate('Play')} >
+            <Text>Jogar</Text>
+            </Button>
+          </Content>
+        </Container>
+      </Root>
     );
   }
 }

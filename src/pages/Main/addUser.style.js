@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
   input: {
     padding: 10,
     height: 40,
-  }
+  },
 });
 
 export default styles;
