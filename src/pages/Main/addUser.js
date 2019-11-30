@@ -16,6 +16,7 @@ import {
   Root,
 } from 'native-base';
 
+import {storeData} from '../../services/storage-service';
 import styles from './addUser.style';
 
 export default class AddUser extends Component {
@@ -39,6 +40,11 @@ export default class AddUser extends Component {
         duration: 3000,
       });
     }
+  }
+
+  jogar() {
+    storeData('jogadores', JSON.stringify(this.state.jogadores));
+    this.props.navigation.navigate('Play');
   }
 
   render() {
@@ -87,7 +93,7 @@ export default class AddUser extends Component {
             </List>
 
             <Button
-            onPress={() => this.props.navigation.navigate('Play')} >
+            onPress={() => this.jogar()} >
             <Text>Jogar</Text>
             </Button>
           </Content>
