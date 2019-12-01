@@ -1,13 +1,12 @@
-import {createAppContainer, createSwitchNavigator} from 'react-navigation';
-import {createStackNavigator} from 'react-navigation-stack';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 
-import AddUser from './pages/Main/addUser';
-import Main from '~/pages/Main';
-import Ranking from './pages/Ranking/Ranking';
+import Game from './pages/Game';
+import Ranking from './pages/Ranking';
 
 const StartStack = createStackNavigator({
-  Main: {screen: AddUser, navigationOptions: {title: 'Jogadores'}},
-  Play: {screen: Ranking, navigationOptions: {title: 'Ranking'}},
+  Main: { screen: Game, navigationOptions: { title: 'Novo Jogo' } },
+  Play: { screen: Ranking, navigationOptions: { title: 'Ranking' } },
 });
 
 const Routes = createAppContainer(

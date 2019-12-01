@@ -16,10 +16,10 @@ import {
   Root,
 } from 'native-base';
 
-import {storeData} from '../../services/storage-service';
-import styles from './addUser.style';
+import Storage from '../../helpers/storage';
+import styles from './styles';
 
-export default class AddUser extends Component {
+export default class Game extends Component {
 
   state = {
     nomeJogador: '',
@@ -42,8 +42,8 @@ export default class AddUser extends Component {
     }
   }
 
-  jogar() {
-    storeData('jogadores', JSON.stringify(this.state.jogadores));
+  async jogar() {
+    await Storage.storeItem('jogadores', JSON.stringify(this.state.jogadores));
     this.props.navigation.navigate('Play');
   }
 
@@ -93,8 +93,8 @@ export default class AddUser extends Component {
             </List>
 
             <Button
-            onPress={() => this.jogar()} >
-            <Text>Jogar</Text>
+              onPress={() => this.jogar()} >
+              <Text>Jogar</Text>
             </Button>
           </Content>
         </Container>
